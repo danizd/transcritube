@@ -26,11 +26,9 @@ SECRET_KEY = 'django-insecure-zu^qa1s!81bs9&_g@eu1cl04vv4(*2q&%qjj(p!gxm4xedlzk6
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['transcritube.onrender.com']
+ALLOWED_HOSTS = ['transcritube.onrender.com', 'localhost', '127.0.0.1']
 
-RENDER_EXTERNAL_HOSTNAME = os.environ.get('RENDER_EXTERNAL_HOSTNAME')
-if RENDER_EXTERNAL_HOSTNAME:
-    ALLOWED_HOSTS.append(RENDER_EXTERNAL_HOSTNAME)
+
 
 # Application definition
 

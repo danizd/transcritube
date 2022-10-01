@@ -7,7 +7,6 @@ import pytube
 from moviepy.editor import VideoFileClip
 import pywhisper
 import os
-import gradio as gr
 import hashlib
 import time
 

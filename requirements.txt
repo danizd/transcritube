@@ -1,0 +1,5 @@
+Django==3.2.14
+gradio==3.4
+moviepy==1.0.3
+pytube==12.1.0
+pywhisper==1.0.3

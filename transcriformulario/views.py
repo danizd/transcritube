@@ -2,6 +2,7 @@ from django.shortcuts import render
 from django.http import HttpResponse
 from django.shortcuts import render
 from .forms import PostForm
+from .forms import CanalForm
 
 import pytube
 from moviepy.editor import VideoFileClip
@@ -9,6 +10,8 @@ import pywhisper
 import os
 import hashlib
 import time
+
+import scrapetube
 
 
 
@@ -72,11 +75,66 @@ def formulario(request):
             form.errors
             enlace = form.cleaned_data.get('enlace')
             filename = download_video(enlace)
-            transc = "--- %s seconds ---" % (time.time() - start_time) +'---------------' + AudiotoText(filename) 
+            #transc = "--- %s seconds ---" % (time.time() - start_time) +'---------------' + AudiotoText(filename) 
+            transc = '<h2>'+filename+'</h2>'+AudiotoText(filename) 
 
         else:
             enlace = 'noooooo'
 
     return render(request, 'transcriformulario/formulario.html',  {'transc': transc})
+
+
+def canal(request):
+    listado = []
+    canal_id = 'aa'
+    if request.method == 'POST':
+        form = CanalForm(request.POST)
+        print(form.errors)
+        if form.is_valid():
+            form.errors
+            canal_id = form.cleaned_data.get('canal')
+            print('canal_id '+canal_id)
+            '''videos = scrapetube.get_channel('UU9-y-6csu5WGm29I7JiwpnA')
+            for video in videos:
+                listado = video['videoId']'''
+
+
+
+            from urllib.request import urlopen
+            
+            # import json
+            import json
+
+            key = 'AIzaSyALOtM3eKMfAL-y9nh2vANAF9nRRa3ACPE'
+            #canal_id = 'UCvsU0EGXN7Su7MfNqcTGNHg'
+
+
+            url = "https://www.googleapis.com/youtube/v3/search?key=AIzaSyALOtM3eKMfAL-y9nh2vANAF9nRRa3ACPE&channelId="+canal_id+"&part=snippet,id&order=date&maxResults=50"
+            
+
+            response = urlopen(url)
+            data_json = json.loads(response.read())
+            print(url)
+            if  'items' in data_json  or len(data_json['items']) != 0:
+                for i in data_json['items']:
+                    print(i)
+                    if  'id' in i or len(i['id']) != 0:
+                        if  'videoId' in i['id']:
+                            listado.append('<a href="https://www.youtube.com/watch?v='+i['id']['videoId']+'">'+ i['snippet']['title']+'</a>')
+            else:
+                listado = ['Algo lle pasa a este canal']
+ 
+
+        else:
+            listado = ['noooooo']
+        print(listado)
+    return render(request, 'transcriformulario/canal.html',  {'listado': listado})
+
+
+
+def blogger(request):
+
+    blogger = 'En proceso...'
+    return render(request, 'transcriformulario/blogger.html',  {'blogger': blogger})
 
 

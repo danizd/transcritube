@@ -16,9 +16,13 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from transcriformulario.views import formulario
+from transcriformulario.views import canal
+from transcriformulario.views import blogger
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', formulario),
+    path('canal', canal),
+    path('blogger', blogger),
 
 ]

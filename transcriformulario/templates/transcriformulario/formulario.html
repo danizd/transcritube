@@ -1,9 +1,7 @@
-
-
 <!doctype html>
 <html lang="en">
   <head>
-    <title>Hello, world!</title>
+    <title>Transcritube</title>
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -22,27 +20,25 @@
         <!-- Navigation-->
         <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top" id="mainNav">
             <div class="container px-4">
-                <a class="navbar-brand" href="#page-top">Start Bootstrap</a>
+              <a class="navbar-brand" href="#page-top">Transcritube</a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
                 <div class="collapse navbar-collapse" id="navbarResponsive">
-                    <ul class="navbar-nav ms-auto">
-                        <li class="nav-item"><a class="nav-link" href="#about">About</a></li>
-                        <li class="nav-item"><a class="nav-link" href="#services">Services</a></li>
-                        <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
-                    </ul>
+
                 </div>
             </div>
         </nav>
         <!-- Header-->
         <header class="bg-primary bg-gradient text-white">
-            <div class="container px-4 text-center">
-                <h1 class="fw-bolder">Welcome to Scrolling Nav</h1>
-                <p class="lead">A functional Bootstrap 5 boilerplate for one page scrolling websites</p>
-                <a class="btn btn-lg btn-light" href="#about">Start scrolling!</a>
+            <div class="container px-4 mt-5 text-center">
+              <div class="clearfix"></div>
+              <h1 class="fw-bolder p-5 mt-5">Transcritube</h1>
+              <p class="lead">Youtube -> Blog</p>
+                <a class="btn btn-lg btn-light" href="/canal">Listados de vídeos de un canal de youtube</a>
+                <a class="btn btn-lg btn-light" href="/">Transcribe vídeo de youtube</a>
+                <a class="btn btn-lg btn-light" href="/blogger">API de blogger</a>
             </div>
         </header>
     <div class="container">
-
         <div class="row">
             <div class="col-md-3">
                 <div class="mt-5">
@@ -51,7 +47,7 @@
                       {{ form.non_field_errors }}
                       {% csrf_token %}
                       <div class="form-group" style="margin:20px 0px 20px 0px;">
-                        <input type="text" name="enlace" class="form-control" id="enlace" placeholder="Introduce o enlace de youtube" width="100%" required></input>
+                        <input type="text" name="enlace" class="form-control" id="enlace" placeholder="Introduce o enlace de youtube" width="100%"></input>
                         <input id="btnFetch" type="submit" value="Enviar">
                         <input type="button" value="Limpiar" onclick="window.location.href=window.location.href">
                       </div>
@@ -59,7 +55,8 @@
                   </div>
                 </div>
                 <div class="col-md-9">
-                  <div id="spinner" class="spinner-border" role="status">
+                  <div id="spinner" style="display:none" class="spinner-border" role="status">
+                    <img src="https://c.tenor.com/tEBoZu1ISJ8AAAAC/spinning-loading.gif" />
                     <span class="sr-only">Loading...</span>
                   </div>
                   <div class="mt-5" id="transcripcion">
@@ -69,7 +66,7 @@
 
 
 
-                      {{ transc}}
+                      {{ transc |safe}}
                     {% endif %}
                   </div>        
             </div>
